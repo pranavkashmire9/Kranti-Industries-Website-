@@ -1070,16 +1070,29 @@ footer {
   .container { padding: 0 18px; }
 
   /* Navigation */
-  .nav-links, .nav-right { display: none; }
-  .brand-text { display: none; }
-  .nav-toggle { display: flex; width: 44px; height: 44px; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
-  .nav-toggle span { background: #ffffff; width: 24px; height: 2px; border-radius: 2px; }
+  .nav-links, .nav-right, .brand, .navbar .btn-primary { display: none; }
   
-  /* Adjusted top to avoid overlap with utility bar which can be 50-70px tall on mobile */
-  .navbar { padding: 0 12px; top: 76px; }
-  .navbar .container { padding: 8px 12px; }
-  .navbar.scrolled .container { max-width: 100%; }
-  .navbar .btn-primary { padding: 12px 18px; font-size: 0.85rem; min-height: 44px; }
+  .navbar { padding: 0 16px; top: 16px; pointer-events: none; }
+  .navbar .container { 
+    padding: 0; 
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    justify-content: flex-end;
+    pointer-events: none;
+  }
+  
+  .nav-toggle { 
+    display: flex; width: 52px; height: 52px; align-items: center; justify-content: center; 
+    flex-direction: column; gap: 5px; 
+    background: #000000;
+    border-radius: 50%;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    pointer-events: auto;
+  }
+  .nav-toggle span { background: #ffffff; width: 22px; height: 2px; border-radius: 2px; }
 
   /* Utility bar */
   .utility-bar .container { font-size: 0.75rem; flex-direction: column; gap: 6px; text-align: center; }

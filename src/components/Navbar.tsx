@@ -57,7 +57,7 @@ export default function Navbar() {
   return (
     <>
       <motion.nav
-        className="fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500 ease-out"
+        className="hidden xl:block fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500 ease-out"
         style={{
           top: scrolled ? '12px' : '16px',
           maxWidth: scrolled ? '1120px' : '1280px',
@@ -120,31 +120,36 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* CTA + Mobile Toggle */}
+            {/* CTA */}
             <div className="flex items-center gap-3">
               <MagneticButton
                 as="a"
                 href="/contact"
-                className="btn-primary hidden sm:inline-flex text-[12px] py-2.5 px-5"
+                className="btn-primary text-[12px] py-2.5 px-5"
                 strength={0.2}
               >
                 Request a Quote
                 <ArrowRight size={14} />
               </MagneticButton>
-
-              <button
-                onClick={() => setMobileOpen(!mobileOpen)}
-                className={`xl:hidden p-2 rounded-full transition-colors duration-300 ${
-                  scrolled ? 'text-[var(--ink)]' : 'text-white'
-                }`}
-                aria-label="Toggle menu"
-              >
-                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-              </button>
             </div>
           </div>
         </div>
       </motion.nav>
+
+      {/* Mobile Floating Menu Button */}
+      <motion.button
+        onClick={() => setMobileOpen(!mobileOpen)}
+        className="xl:hidden fixed top-6 right-6 z-[100] w-[52px] h-[52px] rounded-full bg-black text-white flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{
+          y: hidden && !mobileOpen ? -120 : 0,
+          opacity: hidden && !mobileOpen ? 0 : 1,
+        }}
+        transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+        aria-label="Toggle menu"
+      >
+        {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+      </motion.button>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
