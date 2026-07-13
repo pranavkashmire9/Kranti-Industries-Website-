@@ -16,6 +16,9 @@ export default function Home() {
           <div className="floating-chip">
             <span className="dot" /> 25 Years in Road Safety
           </div>
+          <div className="floating-chip">
+            <span className="dot" /> 578 Awards Won
+          </div>
         </div>
 
         <div className="hero-content" style={{ zIndex: 10, position: 'relative' }}>
@@ -50,6 +53,9 @@ export default function Home() {
             </div>
             <div className="floating-chip">
               <span className="dot" /> 25 Years in Road Safety
+            </div>
+            <div className="floating-chip">
+              <span className="dot" /> 578 Awards Won
             </div>
           </div>
         </div>

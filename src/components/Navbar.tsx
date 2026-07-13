@@ -60,7 +60,7 @@ export default function Navbar() {
         className="fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500 ease-out"
         style={{
           top: scrolled ? '12px' : '16px',
-          maxWidth: scrolled ? '880px' : '1280px',
+          maxWidth: scrolled ? '1120px' : '1280px',
           width: 'calc(100% - 32px)',
           borderRadius: '999px',
         }}
@@ -103,7 +103,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Nav Links */}
-            <div className="hidden lg:flex items-center gap-6">
+            <div className="hidden xl:flex items-center gap-5">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -134,7 +134,7 @@ export default function Navbar() {
 
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className={`lg:hidden p-2 rounded-full transition-colors duration-300 ${
+                className={`xl:hidden p-2 rounded-full transition-colors duration-300 ${
                   scrolled ? 'text-[var(--ink)]' : 'text-white'
                 }`}
                 aria-label="Toggle menu"

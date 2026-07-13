@@ -356,7 +356,7 @@ p { color: var(--color-ink-soft); font-weight: 400; }
 .hero-content {
   position: relative;
   z-index: 5;
-  padding: 100px 32px 64px; /* Added top padding */
+  padding: 180px 32px 64px; /* Increased top padding to prevent navbar overlap */
   max-width: var(--container);
   margin: 0 auto;
   width: 100%;
@@ -422,7 +422,7 @@ p { color: var(--color-ink-soft); font-weight: 400; }
   align-items: flex-end;
   background: var(--color-ink);
   color: #fff;
-  padding-top: 140px;
+  padding-top: 180px;
   overflow: hidden;
 }
 .page-hero-bg {
@@ -1362,9 +1362,8 @@ footer {
   z-index: 1;
   transform: translate(-50%, -50%);
   will-change: transform;
-  display: none;
+  display: block;
 }
-@media (min-width: 980px) { .cursor-glow { display: block; } }
 
 /* ---------- Mobile nav drawer ---------- */
 .mobile-drawer {

@@ -75,14 +75,32 @@ export default function BehaviorManager() {
 
       // 2. Cursor glow
       const glow = document.querySelector('.cursor-glow') as HTMLElement;
-      const handleMouseMoveCursor = (e: MouseEvent) => {
-        if (glow) {
-          glow.style.left = e.clientX + 'px';
-          glow.style.top = e.clientY + 'px';
-        }
-      };
+      let handleMouseMoveCursor: (e: MouseEvent) => void = () => {};
+      let mobileGlowRafId: number | undefined;
+      
       if (glow) {
-        window.addEventListener('mousemove', handleMouseMoveCursor, { passive: true });
+        const isDesktop = window.matchMedia('(pointer: fine)').matches;
+        if (isDesktop) {
+          handleMouseMoveCursor = (e: MouseEvent) => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+          };
+          window.addEventListener('mousemove', handleMouseMoveCursor, { passive: true });
+        } else {
+          // Mobile logic: Automatically wander around the screen
+          let time = 0;
+          const animateMobileGlow = () => {
+            time += 0.015;
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const x = w / 2 + (w / 3.5) * Math.sin(time);
+            const y = h / 2 + (h / 4) * Math.cos(time * 0.8);
+            glow.style.left = x + 'px';
+            glow.style.top = y + 'px';
+            mobileGlowRafId = requestAnimationFrame(animateMobileGlow);
+          };
+          mobileGlowRafId = requestAnimationFrame(animateMobileGlow);
+        }
       }
 
       // 3. Scroll progress stripe
@@ -468,7 +486,8 @@ export default function BehaviorManager() {
 
       cleanupFunc = () => {
         window.removeEventListener('scroll', handleScrollNav);
-        window.removeEventListener('mousemove', handleMouseMoveCursor);
+        if (handleMouseMoveCursor) window.removeEventListener('mousemove', handleMouseMoveCursor);
+        if (mobileGlowRafId) cancelAnimationFrame(mobileGlowRafId);
         document.removeEventListener('scroll', updateStripe);
         document.removeEventListener('scroll', onScrollNav);
         if (toggle) toggle.removeEventListener('click', handleToggleClick);
